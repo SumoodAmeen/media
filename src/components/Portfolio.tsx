@@ -14,7 +14,7 @@ const projects = [
     {
         title: 'Sound Design & Re-Recording',
         category: 'Sound Design',
-        image: 'https://images.unsplash.com/photo-1758553026412-bc1da0ebd366?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtZWRpYSUyMGVkaXRpbmclMjB3b3Jrc3BhY2V8ZW58MXx8fHwxNzY1NTc2OTA2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral'
+        image: 'https://www.rmcad.edu/wp-content/uploads/2025/02/shutterstock_2346223061-scaled.jpg'
     },
     {
         title: 'Creative & Technical Consulting',
