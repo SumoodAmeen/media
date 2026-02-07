@@ -33,7 +33,7 @@ export function About() {
                         </div>
                         <div className="absolute -bottom-6 -left-6 bg-yellow-500 text-black rounded-2xl p-6 max-w-xs">
                             <p className="text-sm">
-                                "Excellence in storytelling through the lens of African creativity"
+                                "Excellence in storytelling through the lens of creativity"
                             </p>
                         </div>
                     </div>
