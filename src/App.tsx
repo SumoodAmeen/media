@@ -14,6 +14,7 @@ import { RefundPolicy } from './components/RefundPolicy';
 import { DeliveryPolicy } from './components/DeliveryPolicy';
 import { GrievancePolicy } from './components/GrievancePolicy';
 import { ScrollToTop } from './components/ScrollToTop';
+import { WhatsAppButton } from './components/WhatsAppButton';
 
 function Home() {
   return (
@@ -37,6 +38,7 @@ export default function App() {
   return (
     <Router>
       <ScrollToTop />
+      <WhatsAppButton />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/terms-and-conditions" element={<TermsAndConditions />} />

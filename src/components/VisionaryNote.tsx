@@ -11,7 +11,7 @@ export function VisionaryNote() {
             <div className="container mx-auto px-4 relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     {/* Image Column */}
-                    <div className="order-2 lg:order-1 relative group lg:max-w-md justify-self-center">
+                    <div className="relative group lg:max-w-md justify-self-center">
                         <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-yellow-500/10 border border-white/10">
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10"></div>
                             <img
@@ -26,7 +26,7 @@ export function VisionaryNote() {
                     </div>
 
                     {/* Content Column */}
-                    <div className="order-1 lg:order-2 text-left">
+                    <div className="text-left">
                         <Quote className="w-12 h-12 text-yellow-500 mb-6 opacity-80" />
 
                         <blockquote className="text-xl md:text-2xl lg:text-3xl text-gray-200 font-light leading-relaxed mb-8 italic">
