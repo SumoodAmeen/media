@@ -1,6 +1,4 @@
 import { Play } from 'lucide-react';
-import { useState, useRef, useEffect } from 'react';
-import type { MouseEvent } from 'react';
 
 const projects = [
     {
@@ -41,81 +39,23 @@ const projects = [
 ];
 
 function ProjectCard({ project }: { project: typeof projects[0] }) {
-    const cardRef = useRef<HTMLDivElement>(null);
-    const [style, setStyle] = useState({});
-    const [isHovered, setIsHovered] = useState(false);
-    const [isVisible, setIsVisible] = useState(false);
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setIsVisible(true);
-                } else {
-                    setIsVisible(false);
-                }
-            },
-            { threshold: 0.2 } // Trigger when 20% visible
-        );
-
-        if (cardRef.current) {
-            observer.observe(cardRef.current);
-        }
-
-        return () => observer.disconnect();
-    }, []);
-
-    const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-        if (!cardRef.current) return;
-        setIsHovered(true);
-
-        const card = cardRef.current;
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-
-        const rotateX = ((y - centerY) / centerY) * -10; // Max rotation 10deg
-        const rotateY = ((x - centerX) / centerX) * 10;
-
-        setStyle({
-            transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`,
-            transition: 'none'
-        });
-    };
-
-    const handleMouseLeave = () => {
-        setIsHovered(false);
-        setStyle({}); // Reset inline style to allow CSS animation to take over if applicable
-    };
-
     return (
-        <div
-            ref={cardRef}
-            className={`group relative overflow-hidden rounded-2xl aspect-video cursor-pointer w-full md:w-[calc(50%-1rem)] lg:w-[calc((100%-4rem)/3)] shadow-xl ${isVisible && !isHovered ? 'animate-holographic' : ''
-                }`}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            style={isHovered ? style : {}} // Only apply inline transform on hover
-        >
+        <div className="group relative overflow-hidden rounded-2xl aspect-video cursor-pointer w-full md:w-[calc(50%-1rem)] lg:w-[calc((100%-4rem)/3)] shadow-xl hover:shadow-2xl transition-shadow duration-300">
             <img
                 src={project.image}
                 alt={project.title}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
-            {/* Holographic Glare */}
-            <div className="holographic-glare absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none mix-blend-overlay"></div>
 
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
 
-            <div className="absolute inset-0 flex items-center justify-center translate-y-4 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                <div className="bg-yellow-500 rounded-full p-4 shadow-lg shadow-yellow-500/20 animate-pulse">
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="bg-yellow-500 rounded-full p-4 shadow-lg shadow-yellow-500/20">
                     <Play className="w-8 h-8 text-black fill-black" />
                 </div>
             </div>
 
-            <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+            <div className="absolute bottom-0 left-0 right-0 p-6">
                 <span className="text-yellow-500 text-sm font-medium tracking-wider">{project.category}</span>
                 <h3 className="text-xl mt-1 font-bold text-white leading-tight">{project.title}</h3>
             </div>
@@ -128,16 +68,16 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
 
 export function Portfolio() {
     return (
-        <section id="portfolio" className="py-24 bg-black overflow-hidden">
+        <section id="portfolio" className="py-24 bg-gradient-to-br from-gray-50 via-white to-teal-50 overflow-hidden">
             <div className="container mx-auto px-4">
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl mb-4 font-bold">Our Portfolio</h2>
+                    <h2 className="text-4xl md:text-5xl text-black mb-4 font-bold">Our Portfolio</h2>
                     <p className="text-xl text-gray-400 max-w-2xl mx-auto">
                         A showcase of our finest work across various media formats
                     </p>
                 </div>
 
-                <div className="flex flex-wrap justify-center gap-8 perspective-1000">
+                <div className="flex flex-wrap justify-center gap-8">
                     {projects.map((project, index) => (
                         <ProjectCard key={index} project={project} />
                     ))}

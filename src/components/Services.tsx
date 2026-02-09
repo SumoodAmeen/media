@@ -79,11 +79,11 @@ export function Services() {
     }, []);
 
     return (
-        <section id="services" className="py-24 bg-gradient-to-b from-black to-gray-900">
+        <section id="services" className="py-24 bg-gray-50">
             <div className="container mx-auto px-4">
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl mb-4">Our Services</h2>
-                    <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+                    <h2 className="text-4xl md:text-5xl mb-4 font-bold text-gray-900">Our Services</h2>
+                    <p className="text-xl text-gray-600 max-w-2xl mx-auto">
                         Comprehensive media production solutions tailored to your needs
                     </p>
                 </div>
@@ -93,38 +93,39 @@ export function Services() {
                         <div
                             key={index}
                             data-index={index}
-                            className="service-card bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-700 ease-out hover:border-yellow-500/50 group w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)] opacity-0 translate-y-10 rotate-2"
+                            className="service-card bg-white border border-gray-100 rounded-2xl p-8 hover:shadow-xl hover:border-teal-100 transition-all duration-700 ease-out group w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)] opacity-0 translate-y-10 rotate-2 shadow-sm"
                             style={{ transitionDelay: `${index * 100}ms` }}
                         >
                             <img
                                 src={service.icon}
                                 alt={service.title}
-                                className="w-12 h-12 mb-4 group-hover:scale-110 transition-transform filter invert sepia saturate-100 hue-rotate-[90deg] brightness-100 contrast-100"
-                                style={{ filter: 'brightness(0) saturate(100%) invert(83%) sepia(34%) saturate(735%) hue-rotate(359deg) brightness(102%) contrast(105%)' }} // Yellow-500 approximation
+                                className="w-12 h-12 mb-4 group-hover:scale-110 transition-transform"
+                                // Teal filter: brightness(0) saturate(100%) invert(43%) sepia(93%) saturate(1352%) hue-rotate(149deg) brightness(91%) contrast(100%)
+                                style={{ filter: 'brightness(0) saturate(100%) invert(43%) sepia(93%) saturate(1352%) hue-rotate(149deg) brightness(91%) contrast(100%)' }}
                             />
-                            <h3 className="text-2xl mb-3">{service.title}</h3>
-                            <p className="text-gray-400">{service.description}</p>
+                            <h3 className="text-2xl mb-3 font-semibold text-gray-900 group-hover:text-teal-600 transition-colors">{service.title}</h3>
+                            <p className="text-gray-600 leading-relaxed">{service.description}</p>
                         </div>
                     ))}
                 </div>
 
-                <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 md:p-12 max-w-4xl mx-auto">
-                    <h3 className="text-2xl md:text-3xl font-semibold mb-6 text-yellow-500 text-center">Payment Nature</h3>
-                    <div className="grid md:grid-cols-3 gap-6 mb-8 text-center bg-transparent">
-                        <div className="bg-black/20 p-4 rounded-xl">
-                            <h4 className="font-medium text-lg mb-2">Advance Booking</h4>
-                            <p className="text-sm text-gray-400">Secure your slot with an advance payment</p>
+                <div className="bg-white border border-gray-100 rounded-2xl p-8 md:p-12 max-w-4xl mx-auto shadow-lg shadow-teal-500/5">
+                    <h3 className="text-2xl md:text-3xl font-semibold mb-6 text-teal-600 text-center">Payment Nature</h3>
+                    <div className="grid md:grid-cols-3 gap-6 mb-8 text-center">
+                        <div className="bg-gray-50 p-6 rounded-xl border border-gray-100">
+                            <h4 className="font-semibold text-lg mb-2 text-gray-900">Advance Booking</h4>
+                            <p className="text-sm text-gray-600">Secure your slot with an advance payment</p>
                         </div>
-                        <div className="bg-black/20 p-4 rounded-xl">
-                            <h4 className="font-medium text-lg mb-2">Milestone-Based</h4>
-                            <p className="text-sm text-gray-400">Pay in stages as the project progresses</p>
+                        <div className="bg-gray-50 p-6 rounded-xl border border-gray-100">
+                            <h4 className="font-semibold text-lg mb-2 text-gray-900">Milestone-Based</h4>
+                            <p className="text-sm text-gray-600">Pay in stages as the project progresses</p>
                         </div>
-                        <div className="bg-black/20 p-4 rounded-xl">
-                            <h4 className="font-medium text-lg mb-2">Full Service</h4>
-                            <p className="text-sm text-gray-400">Complete payment for one-off services</p>
+                        <div className="bg-gray-50 p-6 rounded-xl border border-gray-100">
+                            <h4 className="font-semibold text-lg mb-2 text-gray-900">Full Service</h4>
+                            <p className="text-sm text-gray-600">Complete payment for one-off services</p>
                         </div>
                     </div>
-                    <p className="text-center text-gray-300 italic border-t border-white/10 pt-6">
+                    <p className="text-center text-gray-500 italic border-t border-gray-100 pt-6">
                         "All payments made through this website are strictly for professional creative services and post-production work."
                     </p>
                 </div>
