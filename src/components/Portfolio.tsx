@@ -93,7 +93,7 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
     return (
         <div
             ref={cardRef}
-            className={`group relative overflow-hidden rounded-2xl aspect-video cursor-pointer w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1rem)] shadow-xl ${isVisible && !isHovered ? 'animate-holographic' : ''
+            className={`group relative overflow-hidden rounded-2xl aspect-video cursor-pointer w-full md:w-[calc(50%-1rem)] lg:w-[calc((100%-4rem)/3)] shadow-xl ${isVisible && !isHovered ? 'animate-holographic' : ''
                 }`}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
