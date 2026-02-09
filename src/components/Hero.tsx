@@ -11,7 +11,7 @@ export function Hero() {
             {/* Content */}
             <div className="relative z-10 container mx-auto px-4 text-center">
                 <div className="max-w-4xl mx-auto">
-                    <h1 className="text-5xl md:text-7xl mb-6 font-bold text-white opacity-0 animate-slide-in-left">
+                    <h1 className="text-4xl md:text-7xl mb-6 font-bold text-white opacity-0 animate-slide-in-left">
                         Crafting Stories That <span className="text-gray-900">Inspire</span>
                     </h1>
                     <p className="text-xl md:text-2xl mb-8 text-gray-900 font-medium opacity-0 animate-slide-in-right delay-200">
