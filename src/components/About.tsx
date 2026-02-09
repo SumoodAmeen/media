@@ -20,6 +20,13 @@ export function About() {
                         <p className="text-lg text-gray-400 mb-8">
                             We are committed to ethical business practices, transparency in payments, and delivering industry-standard creative outputs aligned with global media standards.
                         </p>
+
+                        <div className="mt-8 pt-6 border-t border-gray-800">
+                            <p className="text-gray-300 font-medium mb-2">Nature: Service-based Digital Commerce (Not Physical E-Commerce)</p>
+                            <p className="text-gray-400 text-sm">
+                                GOGIL ZENVOGUE OPC PRIVATE LIMITED operates as a service provider offering digital post-production and creative services. No physical goods are sold or shipped only selling digital / online contents all over world. Payments are collected for professional services, bookings, and milestones.
+                            </p>
+                        </div>
                     </div>
 
                     <div className="relative">
