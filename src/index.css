@@ -6,3 +6,132 @@ body {
   min-height: 100vh;
   /* background-color: #ffffff; */
 }
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInBottom {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 1s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 1s ease-out forwards;
+}
+
+.animate-slide-in-bottom {
+  animation: slideInBottom 1s ease-out forwards;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-500 {
+  animation-delay: 500ms;
+}
+
+@keyframes vibrate {
+  0% {
+    transform: translate(0);
+  }
+
+  20% {
+    transform: translate(-2px, 2px);
+  }
+
+  40% {
+    transform: translate(-2px, -2px);
+  }
+
+  60% {
+    transform: translate(2px, 2px);
+  }
+
+  80% {
+    transform: translate(2px, -2px);
+  }
+
+  100% {
+    transform: translate(0);
+  }
+}
+
+.animate-vibrate {
+  animation: vibrate 0.5s linear infinite;
+  /* Will run for 3s via JS removal or wrapper */
+}
+
+@keyframes holographicSweep {
+  0% {
+    transform: perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1);
+  }
+
+  25% {
+    transform: perspective(1000px) rotateX(10deg) rotateY(-20deg) scale3d(1.05, 1.05, 1.05);
+  }
+
+  50% {
+    transform: perspective(1000px) rotateX(-10deg) rotateY(20deg) scale3d(1.05, 1.05, 1.05);
+  }
+
+  75% {
+    transform: perspective(1000px) rotateX(5deg) rotateY(-10deg) scale3d(1.02, 1.02, 1.02);
+  }
+
+  100% {
+    transform: perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1);
+  }
+}
+
+.animate-holographic {
+  animation: holographicSweep 3s ease-in-out infinite;
+}
+
+.animate-holographic .holographic-glare {
+  animation: glareOpacity 3s ease-in-out infinite;
+}
+
+@keyframes glareOpacity {
+
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}

@@ -1,4 +1,6 @@
 import { Play } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+import type { MouseEvent } from 'react';
 
 const projects = [
     {
@@ -32,47 +34,112 @@ const projects = [
         image: 'https://images.unsplash.com/photo-1655802696525-3f686da00887?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBjaW5lbWF0b2dyYXBoeXxlbnwxfHx8fDE3NjU1NzY5MDZ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral'
     },
     {
-        title: 'Documentary & Digital Content Post-Production',
+        title: 'Documentary & Digital Content',
         category: 'Documentary',
         image: 'https://images.unsplash.com/photo-1758553026412-bc1da0ebd366?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtZWRpYSUyMGVkaXRpbmclMjB3b3Jrc3BhY2V8ZW58MXx8fHwxNzY1NTc2OTA2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral'
     }
 ];
 
+function ProjectCard({ project }: { project: typeof projects[0] }) {
+    const cardRef = useRef<HTMLDivElement>(null);
+    const [style, setStyle] = useState({});
+    const [isHovered, setIsHovered] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                } else {
+                    setIsVisible(false);
+                }
+            },
+            { threshold: 0.2 } // Trigger when 20% visible
+        );
+
+        if (cardRef.current) {
+            observer.observe(cardRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
+
+    const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+        if (!cardRef.current) return;
+        setIsHovered(true);
+
+        const card = cardRef.current;
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateX = ((y - centerY) / centerY) * -10; // Max rotation 10deg
+        const rotateY = ((x - centerX) / centerX) * 10;
+
+        setStyle({
+            transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`,
+            transition: 'none'
+        });
+    };
+
+    const handleMouseLeave = () => {
+        setIsHovered(false);
+        setStyle({}); // Reset inline style to allow CSS animation to take over if applicable
+    };
+
+    return (
+        <div
+            ref={cardRef}
+            className={`group relative overflow-hidden rounded-2xl aspect-video cursor-pointer w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1rem)] shadow-xl ${isVisible && !isHovered ? 'animate-holographic' : ''
+                }`}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            style={isHovered ? style : {}} // Only apply inline transform on hover
+        >
+            <img
+                src={project.image}
+                alt={project.title}
+                className="w-full h-full object-cover"
+            />
+            {/* Holographic Glare */}
+            <div className="holographic-glare absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none mix-blend-overlay"></div>
+
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+
+            <div className="absolute inset-0 flex items-center justify-center translate-y-4 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                <div className="bg-yellow-500 rounded-full p-4 shadow-lg shadow-yellow-500/20 animate-pulse">
+                    <Play className="w-8 h-8 text-black fill-black" />
+                </div>
+            </div>
+
+            <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                <span className="text-yellow-500 text-sm font-medium tracking-wider">{project.category}</span>
+                <h3 className="text-xl mt-1 font-bold text-white leading-tight">{project.title}</h3>
+            </div>
+
+            {/* Border Glow */}
+            <div className="absolute inset-0 border-2 border-transparent group-hover:border-yellow-500/30 rounded-2xl transition-colors duration-300 pointer-events-none"></div>
+        </div>
+    );
+}
+
 export function Portfolio() {
     return (
-        <section id="portfolio" className="py-24 bg-black">
+        <section id="portfolio" className="py-24 bg-black overflow-hidden">
             <div className="container mx-auto px-4">
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl mb-4">Our Portfolio</h2>
+                    <h2 className="text-4xl md:text-5xl mb-4 font-bold">Our Portfolio</h2>
                     <p className="text-xl text-gray-400 max-w-2xl mx-auto">
                         A showcase of our finest work across various media formats
                     </p>
                 </div>
 
-                <div className="flex flex-wrap justify-center gap-6">
+                <div className="flex flex-wrap justify-center gap-8 perspective-1000">
                     {projects.map((project, index) => (
-                        <div
-                            key={index}
-                            className="group relative overflow-hidden rounded-2xl aspect-video cursor-pointer w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1rem)]"
-                        >
-                            <img
-                                src={project.image}
-                                alt={project.title}
-                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
-
-                            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                <div className="bg-yellow-500 rounded-full p-4">
-                                    <Play className="w-8 h-8 text-black" />
-                                </div>
-                            </div>
-
-                            <div className="absolute bottom-0 left-0 right-0 p-6">
-                                <span className="text-yellow-500 text-sm">{project.category}</span>
-                                <h3 className="text-xl mt-1">{project.title}</h3>
-                            </div>
-                        </div>
+                        <ProjectCard key={index} project={project} />
                     ))}
                 </div>
             </div>

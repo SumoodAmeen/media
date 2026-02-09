@@ -1,4 +1,5 @@
 
+import { useEffect, useRef } from 'react';
 
 const services = [
     {
@@ -39,6 +40,44 @@ const services = [
 ];
 
 export function Services() {
+    const observerRef = useRef<IntersectionObserver | null>(null);
+
+    useEffect(() => {
+        observerRef.current = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const target = entry.target as HTMLElement;
+                    target.classList.add('opacity-100', 'translate-y-0', 'rotate-0');
+                    target.classList.remove('opacity-0', 'translate-y-10', 'rotate-2');
+
+                    // Stop observing for scroll animation
+                    observerRef.current?.unobserve(target);
+
+                    // Trigger vibration after entrance transition (delay + duration)
+                    const index = parseInt(target.dataset.index || '0');
+                    const delay = index * 100; // Match transitionDelay
+                    const duration = 700; // Match transition duration
+
+                    setTimeout(() => {
+                        target.classList.add('animate-vibrate');
+                    }, delay + duration);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '50px'
+        });
+
+        const cards = document.querySelectorAll('.service-card');
+        cards.forEach((card) => observerRef.current?.observe(card));
+
+        return () => {
+            if (observerRef.current) {
+                observerRef.current.disconnect();
+            }
+        };
+    }, []);
+
     return (
         <section id="services" className="py-24 bg-gradient-to-b from-black to-gray-900">
             <div className="container mx-auto px-4">
@@ -53,7 +92,9 @@ export function Services() {
                     {services.map((service, index) => (
                         <div
                             key={index}
-                            className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all hover:border-yellow-500/50 group w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)]"
+                            data-index={index}
+                            className="service-card bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-700 ease-out hover:border-yellow-500/50 group w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)] opacity-0 translate-y-10 rotate-2"
+                            style={{ transitionDelay: `${index * 100}ms` }}
                         >
                             <img
                                 src={service.icon}

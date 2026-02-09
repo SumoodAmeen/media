@@ -31,13 +31,13 @@ export function Hero() {
             {/* Content */}
             <div className="relative z-10 container mx-auto px-4 text-center">
                 <div className="max-w-4xl mx-auto">
-                    <h1 className="text-5xl md:text-7xl mb-6">
+                    <h1 className="text-5xl md:text-7xl mb-6 opacity-0 animate-slide-in-left">
                         Crafting Stories That <span className="text-yellow-500">Inspire</span>
                     </h1>
-                    <p className="text-xl md:text-2xl mb-8 text-gray-300">
+                    <p className="text-xl md:text-2xl mb-8 text-gray-300 opacity-0 animate-slide-in-right delay-200">
                         Professional Media and Creative Services Company - From Concept to Screen
                     </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center opacity-0 animate-slide-in-bottom delay-500">
                         <button
                             onClick={() => scrollToSection('portfolio')}
                             className="bg-yellow-500 hover:bg-yellow-600 text-black px-8 py-4 rounded-full transition-colors flex items-center justify-center gap-2"
